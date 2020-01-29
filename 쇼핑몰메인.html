@@ -58,94 +58,135 @@
 			}
 		}
 
-		</script>
+		$( document ).ready(function listing(){
+			$.ajax({
+				type: "GET",
+				url: "http://spartacodingclub.shop/order",
+				data: {},
+				success: function(response){
+					console.log(response)
+					let orders = response['orders'];
+					for (let i = 0 ; i < orders.length; i++){
+						let address = orders[i]['address'];
+						let count = orders[i]['count'];
+						let name = orders[i]['name'];
+						let phone = orders[i]['phone'];
 
-		<style>
-			.wrap {
-				width: 900;
-				margin: 25px auto 25px auto;
-			}
+						let temp_html = '<tr>\
+						<th scope="row">'+name+'</th>\
+						<td>'+count+'</td>\
+						<td>'+address+'</td>\
+						<td>'+phone+'</td>\
+						</tr>'
+						$('#order_table').append(temp_html);
 
-			.pot-picture{
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				padding: 15px 0px 30px 0px;
-			}
 
-			.item-name {
-				margin: 0px 0px 15px 0px;
-			}
+					}
+				}
+			})
+		})
+	</script>
 
-			.price-notice {
-				font-size: 30px;
-				margin: 10px 0px 15px 0px;
-			}
+	<style>
+		.wrap {
+			width: 900;
+			margin: 25px auto 25px auto;
+		}
 
-			.item-explain {
-				font size: 15px;
-				margin: 10px 0px 15px 0px;
-			}
+		.pot-picture{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 15px 0px 30px 0px;
+		}
 
-			.order-btn {
-				display:flex;
-				align-items: center;
-			}
+		.item-name {
+			margin: 0px 0px 15px 0px;
+		}
 
-		</style>
-	</head>
-	<body>
-		<div class="wrap">
+		.price-notice {
+			font-size: 30px;
+			margin: 10px 0px 15px 0px;
+		}
 
-			<a class="pot-picture" href="url">
-				<img src="http://thumbnail.10x10.co.kr/webimage/image/add1_600/193/A001930161_01.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" border="0">
-			</a>
+		.item-explain {
+			font size: 15px;
+			margin: 10px 0px 15px 0px;
+		}
 
-			<div class="item-name">
-				<h1>화분을 팝니다 <span class="price-notice"> 3000원/개</span></h1>
-			</div>
-			<div class="item-explain">
-				미세먼지가 많아진 요즘입니다. 화분 하나로 인테리어와 실내 공기까지 산뜻하게 바꿔 보는건 어떨까요?
-			</div>
+		.order-btn {
+			display:flex;
+			align-items: center;
+		}
 
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">주문자 이름</span>
-				</div>
-				<input id="name_input" type="text" class="form-control" placeholder="주문자 이름" aria-label="Username" aria-describedby="basic-addon1">
-			</div>
+	</style>
+</head>
+<body>
+	<div class="wrap">
 
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">수량
-					</label>
-				</div>
-				<select class="custom-select" id="inputGroupSelect01">
-					<option value="0">최대 3개까지 선택 가능합니다</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-			</div>
+		<a class="pot-picture" href="url">
+			<img src="http://thumbnail.10x10.co.kr/webimage/image/add1_600/193/A001930161_01.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" border="0">
+		</a>
 
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">주소</span>
-				</div>
-				<input id="address_input" type="text" class="form-control" placeholder="주소" aria-label="Username" aria-describedby="basic-addon1">
-			</div>
-
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">전화번호</span>
-				</div>
-				<input id="phone_number_input" type="text" class="form-control" placeholder="전화번호" aria-label="Username" aria-describedby="basic-addon1">
-			</div>
-
-			<div class="text-center"style="float:none; margin:0 auto">
-				<button onclick="input_check()" type="button" class="btn btn-primary order">주문하기</button>
-			</div>
-
+		<div class="item-name">
+			<h1>화분을 팝니다 <span class="price-notice"> 3000원/개</span></h1>
 		</div>
-	</body>
-	</html>
+		<div class="item-explain">
+			미세먼지가 많아진 요즘입니다. 화분 하나로 인테리어와 실내 공기까지 산뜻하게 바꿔 보는건 어떨까요?
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">주문자 이름</span>
+			</div>
+			<input id="name_input" type="text" class="form-control" placeholder="주문자 이름" aria-label="Username" aria-describedby="basic-addon1">
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<label class="input-group-text" for="inputGroupSelect01">수량
+				</label>
+			</div>
+			<select class="custom-select" id="inputGroupSelect01">
+				<option value="0">최대 3개까지 선택 가능합니다</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">주소</span>
+			</div>
+			<input id="address_input" type="text" class="form-control" placeholder="주소" aria-label="Username" aria-describedby="basic-addon1">
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">전화번호</span>
+			</div>
+			<input id="phone_number_input" type="text" class="form-control" placeholder="전화번호" aria-label="Username" aria-describedby="basic-addon1">
+		</div>
+
+		<div class="text-center"style="float:none; margin:0 auto">
+			<button onclick="input_check()" type="button" class="btn btn-primary order">주문하기</button>
+		</div>
+
+		<table class="table" style="margin: 30px auto auto auto;">
+			<thead>
+				<tr>
+					<th scope="col">이름</th>
+					<th scope="col">수량</th>
+					<th scope="col">주소</th>
+					<th scope="col">전화번호</th>
+				</tr>
+			</thead>
+			<tbody id="order_table">
+				
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
